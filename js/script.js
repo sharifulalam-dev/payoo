@@ -7,7 +7,7 @@ loginBtn.addEventListener("click", (e) => {
   let userPass = pinNumber.value;
 
   if (userNumber === "017" && userPass === "123") {
-    window.location.href = "/home.html";
+    window.location.href = "./home.html";
   } else {
     alert("Enter Correct Phone Number and Password");
   }
