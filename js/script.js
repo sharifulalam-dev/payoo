@@ -1,6 +1,7 @@
-const loginBtn = document.getElementById("login-button");
 const phoneNumber = document.querySelector(".phone-number");
 const pinNumber = document.querySelector(".pin-number");
+const loginBtn = document.querySelector(".login-button");
+
 loginBtn.addEventListener("click", (e) => {
   e.preventDefault();
   let userNumber = phoneNumber.value;

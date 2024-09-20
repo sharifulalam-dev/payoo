@@ -1,14 +1,20 @@
-const addMoneyBtn = document.querySelector(".button-addmoney");
-const addMoneyPin = document.querySelector(".pin-addmoney");
-const inputUserAmount = document.querySelector(".amount-addmoney");
-const totalAmount = document.querySelector(".stat-value");
-const outMoneyBtn = document.querySelector(".button-outmoney");
-const addMoney = document.querySelector(".addMoney");
-const outMoney = document.querySelector(".outMoney");
-const outMoneyAmount = document.querySelector(".amount-outmoney");
-const outMoneyPin = document.querySelector(".pin-outmoney");
-const card1 = document.querySelector(".card-1");
-const card2 = document.querySelector(".card-2");
+function getItemValue(item) {
+  return document.querySelector(item);
+}
+
+const addMoneyBtn = getItemValue(".button-addmoney");
+const addMoneyPin = getItemValue(".pin-addmoney");
+const inputUserAmount = getItemValue(".amount-addmoney");
+const totalAmount = getItemValue(".stat-value");
+const outMoneyBtn = getItemValue(".button-outmoney");
+const addMoney = getItemValue(".addMoney");
+const outMoney = getItemValue(".outMoney");
+const outMoneyAmount = getItemValue(".amount-outmoney");
+const outMoneyPin = getItemValue(".pin-outmoney");
+const card1 = getItemValue(".card-1");
+const card2 = getItemValue(".card-2");
+const transferBtn = getItemValue(".transfer-btn");
+const transactionHistory = getItemValue(".transaction-history");
 
 addMoneyBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -19,6 +25,9 @@ addMoneyBtn.addEventListener("click", (e) => {
     const newTotal = currentTotal + userInput;
 
     totalAmount.textContent = newTotal;
+    const p = document.createElement("p");
+    p.innerText = `Added : ${userInput} and New Balance is ${newTotal}`;
+    transactionHistory.appendChild(p);
 
     outMoneyAmount.value = "";
     outMoneyPin.value = "";
@@ -35,17 +44,36 @@ outMoneyBtn.addEventListener("click", (e) => {
 
     totalAmount.textContent = newTotal;
 
+    const div = document.createElement("div");
+
+    div.classList.add("bg-yellow-500", "mt-4", "p-2");
+    div.innerHTML = `<h3 class="font-bold text-2xl">Cash Out</h3>
+    <p>Deduct : ${userInput} and New Balance is ${newTotal}</p>`;
+    transactionHistory.appendChild(div);
+
     outMoneyAmount.value = "";
     outMoneyPin.value = "";
   }
 });
 
 outMoney.addEventListener("click", () => {
-  card1.classList.add("hidden");
-  card2.classList.remove("hidden");
+  console.log(card2);
+  showItem(card2);
 });
 
 addMoney.addEventListener("click", () => {
-  card1.classList.remove("hidden");
-  card2.classList.add("hidden");
+  console.log(card1);
+  showItem(card1);
 });
+
+transferBtn.addEventListener("click", () => {
+  showItem(transactionHistory);
+});
+
+function showItem(id) {
+  card1.classList.add("hidden");
+  card2.classList.add("hidden");
+  transactionHistory.classList.add("hidden");
+
+  id.classList.remove("hidden");
+}
